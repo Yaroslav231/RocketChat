@@ -120,7 +120,12 @@ impl ClientsDataHandler {
         tokio::spawn(async move {
             if let Err(e) = events_handler.run().await {
                 eprintln!(
-                    "З'єднання {} завершилося з помилкою: {e}",
+                    "Помилка з'єднання {}: {e}",
+                    cleanup_client.connection_id
+                );
+            } else {
+                eprintln!(
+                    "Клієнт {} відключився",
                     cleanup_client.connection_id
                 );
             }
